@@ -16,13 +16,11 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
+const inventoryCollection = client.db('inventory').collection('items');
 
 const run = async () => {
   try {
-    client.connect();
-
-    const inventoryCollection = client.db('inventory').collection('items');
-
+    await client.connect();
     app.get('/inventory', async (req, res) => {
       const query = {};
       const cursor = inventoryCollection.find(query);
