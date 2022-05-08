@@ -30,6 +30,13 @@ const run = async () => {
       const result = await cursor.toArray();
       res.send(result);
     });
+    // Get Six Items
+    app.get('/home/inventory/', async (req, res) => {
+      const query = {};
+      const cursor = inventoryCollection.find(query).limit(6);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     // Add Item
     app.post('/inventory', async (req, res) => {
